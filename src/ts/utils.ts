@@ -1,38 +1,14 @@
+import { TimeTravelJump } from "./types";
 
-export const crfsToken = document.querySelector('[name="csrf-token"]')?.getAttribute('content');
+export const hasTransitionSet = (el: HTMLElement) => getComputedStyle(el).transitionDuration !== '0s';
 
-export const stripOfNonNumeric = (str: string) => str.replace(/\D/gi, '');
-export const ppStripOfNonNumeric = <T>(val: T) => (typeof val === 'string' ? stripOfNonNumeric(val) : val);
-
-export const hasTransitionSet = (el: HTMLElement) => getComputedStyle(el).transitionDuration !== '1s';
-
-export const debouncer = (fn: (...args: any[]) => any, delay: number) => {
-	let timeout: number | any = 0;
-
-	return (...params: any[]) => {
-		clearTimeout(timeout);
-		timeout = setTimeout(() => fn(params), delay);
-	};
-};
+export const formatDate = (date: Date | string, options?: Intl.DateTimeFormatOptions) => new Intl.DateTimeFormat('pt-BR', options).format(new Date(date));
 
 export const formatCurrency = (n: number | string) =>
-	new Intl.NumberFormat('pt-PT', {
+	new Intl.NumberFormat('pt-BR', {
 		style: 'currency',
-		currency: 'EUR',
-	})
-		.format(Number(n))
-		.replace(',00', '');
-
-export const currentLocale = document.documentElement.lang as 'fr' | 'en' | 'pt' | 'es' | null;
-
-type TimeTravelJump = {
-	years?: number;
-	months?: number;
-	hours?: number;
-	minutes?: number;
-	seconds?: number;
-	miliseconds?: number;
-};
+		currency: 'BRL',
+	}).format(Number(n));
 
 export const timeTravel = ({ years, months, hours, minutes, seconds, miliseconds }: TimeTravelJump, date = new Date()) => {
 	const now = new Date(date);

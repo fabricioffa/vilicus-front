@@ -11,39 +11,36 @@
 		<main>
 			<h1 class="mt-10 text-6xl font-bold text-center">Vilicus</h1>
 
+
 			<section class="container flex justify-center gap-10 my-20">
-				<ul class="space-y-6 border-l lg:space-y-2 border-slate-100 dark:border-slate-800" role="tablist">
+				<ul is="tab-list" class="space-y-6 border-l lg:space-y-2 border-slate-100 dark:border-slate-800">
 					<li
-						class="block pl-4 -ml-px border-l border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300 has-[>[role='tab']:aria-select]:text-sky-500 has-[>[role='tab']:aria-select]:border-current has-[>[role='tab']:aria-select]:font-semibold has-[>[role='tab']:aria-select]:dark:text-sky-400"
-						role="presentation">
-						<button class="[&_*]:pointer-events-none" id="tab-product-table" type="button" role="tab" aria-controls="tabpanel-product-table" aria-selected="true">
-							Tabela de Produtos
-						</button>
+						is="tab-item"
+						tab-name="product-table"
+						class="block pl-4 -ml-px border-l border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300 has-[>[role='tab']:aria-select]:text-sky-500 has-[>[role='tab']:aria-select]:border-current has-[>[role='tab']:aria-select]:font-semibold has-[>[role='tab']:aria-select]:dark:text-sky-400">
+						Tabela de Produtos
 					</li>
 					<li
-						class="block pl-4 -ml-px border-l border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300 has-[>[role='tab']:aria-select]:text-sky-500 has-[>[role='tab']:aria-select]:border-current has-[>[role='tab']:aria-select]:font-semibold has-[>[role='tab']:aria-select]:dark:text-sky-400"
-						role="presentation">
-						<button class="[&_*]:pointer-events-none" id="tab-product-form" type="button" role="tab" aria-controls="tabpanel-product-form" aria-selected="false">
-							Formulário de Produtos
-						</button>
+						is="tab-item"
+						tab-name="product-form"
+						class="block pl-4 -ml-px border-l border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300 has-[>[role='tab']:aria-select]:text-sky-500 has-[>[role='tab']:aria-select]:border-current has-[>[role='tab']:aria-select]:font-semibold has-[>[role='tab']:aria-select]:dark:text-sky-400">
+						Formulário de Produtos
 					</li>
 					<li
-						class="block pl-4 -ml-px border-l border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300 has-[>[role='tab']:aria-select]:text-sky-500 has-[>[role='tab']:aria-select]:border-current has-[>[role='tab']:aria-select]:font-semibold has-[>[role='tab']:aria-select]:dark:text-sky-400"
-						role="presentation">
-						<button class="[&_*]:pointer-events-none" id="tab-category-table" type="button" role="tab" aria-controls="tabpanel-category-table" aria-selected="false">
-							Tabela de Categorias
-						</button>
+						is="tab-item"
+						tab-name="category-table"
+						class="block pl-4 -ml-px border-l border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300 has-[>[role='tab']:aria-select]:text-sky-500 has-[>[role='tab']:aria-select]:border-current has-[>[role='tab']:aria-select]:font-semibold has-[>[role='tab']:aria-select]:dark:text-sky-400">
+						Tabela de Categorias
 					</li>
 					<li
-						class="block pl-4 -ml-px border-l border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300 has-[>[role='tab']:aria-select]:text-sky-500 has-[>[role='tab']:aria-select]:border-current has-[>[role='tab']:aria-select]:font-semibold has-[>[role='tab']:aria-select]:dark:text-sky-400"
-						role="presentation">
-						<button class="[&_*]:pointer-events-none" id="tab-category-form" type="button" role="tab" aria-controls="tabpanel-category-form" aria-selected="false">
-							Formulário de Categorias
-						</button>
+						is="tab-item"
+						tab-name="category-form"
+						class="block pl-4 -ml-px border-l border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300 has-[>[role='tab']:aria-select]:text-sky-500 has-[>[role='tab']:aria-select]:border-current has-[>[role='tab']:aria-select]:font-semibold has-[>[role='tab']:aria-select]:dark:text-sky-400">
+						Formulário de Categorias
 					</li>
 				</ul>
 
-				<div class="transition-opacity easy-in-out durantion-300" aria-labelledby="tab-product-table" id="tabpanel-product-table" role="tabpanel">
+				<div is="tab-panel" tab-name="product-table">
 					<table class="mx-auto table-auto">
 						<thead>
 							<tr>
@@ -69,7 +66,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="hidden transition-opacity opacity-0 easy-in-out durantion-300" aria-labelledby="tab-product-form" id="tabpanel-product-form" role="tabpanel">
+				<div is="tab-panel" tab-name="product-form">
 					<form action="/products" method="post" id="product-form">
 						<fieldset class="grid items-center grid-cols-2 gap-x-8 gap-y-5">
 							<legend class="row-span-2 mb-8 text-2xl font-semibold text-center">Insira um novo produto</legend>
@@ -129,30 +126,13 @@
 						</fieldset>
 					</form>
 				</div>
-				<div class="hidden transition-opacity opacity-0 easy-in-out durantion-300" aria-labelledby="tab-category-table" id="tabpanel-category-table" role="tabpanel">
-					<table class="mx-auto table-auto">
-						<thead>
-							<tr>
-								<th class="p-4 pt-0 pb-3 font-medium text-left border-b first:ps-8 last:pe-8 dark:border-slate-600 text-slate-400 dark:text-slate-200">ID</th>
-								<th class="p-4 pt-0 pb-3 font-medium text-left border-b first:ps-8 last:pe-8 dark:border-slate-600 text-slate-400 dark:text-slate-200">Nome</th>
-								<th class="p-4 pt-0 pb-3 font-medium text-left border-b first:ps-8 last:pe-8 dark:border-slate-600 text-slate-400 dark:text-slate-200">Criação em</th>
-								<th class="p-4 pt-0 pb-3 font-medium text-left border-b first:ps-8 last:pe-8 dark:border-slate-600 text-slate-400 dark:text-slate-200">Atgualizado em</th>
-							</tr>
-						</thead>
-						<tbody class="bg-white dark:bg-slate-800">
-							<tr>
-								<td class="p-4 border-b first:ps-8 last:pe-8 border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">01</td>
-								<td class="p-4 border-b first:ps-8 last:pe-8 border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">Fruta</td>
-								<td class="p-4 border-b first:ps-8 last:pe-8 border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">20/08/2024</td>
-								<td class="p-4 border-b first:ps-8 last:pe-8 border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400">30/08/2024</td>
-							</tr>
-						</tbody>
-					</table>
+				<div is="tab-panel" tab-name="category-table">
+					<placeholder id="category-table" />
 				</div>
-				<div class="hidden transition-opacity opacity-0 easy-in-out durantion-300" aria-labelledby="tab-category-form" id="tabpanel-category-form" role="tabpanel">
+				<div is="tab-panel" tab-name="category-form">
 					<form action="/categories" method="post" id="category-form">
-						<fieldset class="grid items-center grid-cols-2 gap-x-8 gap-y-5">
-							<legend class="row-span-2 mb-8 text-2xl font-semibold text-center">Insira uma nova categoria</legend>
+						<fieldset class="flex flex-col items-center gap-y-5">
+							<legend class="mb-8 text-2xl font-semibold text-center">Insira uma nova categoria</legend>
 
 							<div class="flex gap-2">
 								<label for="category-name">Nome: </label>
@@ -169,7 +149,7 @@
 								<p role="alert" class="mt-1 text-sm text-red-500 empty:hidden" id="category-name-error-msg"></p>
 							</div>
 
-							<button class="col-span-2 px-6 py-1 rounded-md bg-slate-700 hover:bg-slate-600 active:bg-slate-500 place-self-center">Criar categoria</button>
+							<button class="px-6 py-1 rounded-md bg-slate-700 hover:bg-slate-600 active:bg-slate-500">Criar categoria</button>
 						</fieldset>
 					</form>
 				</div>

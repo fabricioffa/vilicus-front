@@ -1,4 +1,4 @@
-import { ApiResponse, BaseTData, Category, ErrorData } from './types';
+import { ApiResponse, BaseTData } from './types';
 import { timeTravel } from './utils';
 
 export type CachedFetchArgs = {
@@ -37,48 +37,42 @@ export const apiFetch = async <TData extends BaseTData>({ key, endpoint, init }:
 		cache.set(key, { data, expiresAt: timeTravel({ minutes: expirationTime }) });
 		return { success: true, data };
 	} catch (error) {
-		console.log('%c error', 'color: green', error);
+		// console.log('%c error', 'color: green', error);
 		return { success: false, data: { type: 'Client Error', description: error ? JSON.stringify(error) : 'Unknown' } };
 	}
 };
 
 const onGoingRequests = new Map<string, ReturnType<typeof apiFetch>>();
-type foo = Promise<ApiResponse<Category> & {
-	loading: boolean
-}> 
-
-const bar = {} as Awaited<foo>
-
 
 export const cachedFetch = async <TData extends BaseTData>({ key, endpoint, init }: CachedFetchArgs): Promise<ApiResponse<TData>> => {
 	// check for cached data
 	if (cache.has(key)) {
 		const cachedData = cache.get(key)!;
-		if (cachedData.expiresAt >= new Date()) cache.delete(key);
+		if (new Date() >= cachedData.expiresAt) cache.delete(key);
 		else
 			return {
 				success: true,
-				data: cachedData.data as TData,
+				data: cachedData.data as TData[],
 			};
 	}
 
 	// dedup requests
+	// console.log('%c onGoingRequests inicial: ', 'color: green', ...onGoingRequests.entries())
 	const requestID = JSON.stringify({ key, endpoint, init });
-
+	// console.log('%c requestID', 'color: green', requestID);
+	// console.log('%c onGoingRequests.has(requestID)', 'color: green', onGoingRequests.has(requestID))
 	if (onGoingRequests.has(requestID)) return onGoingRequests.get(requestID) as unknown as Promise<ApiResponse<TData>>;
+	// console.log('%c Passou do dedup', 'color: yellow')
 
 	const apiResponse = apiFetch<TData>({ key, endpoint, init });
+	// console.log('%c Iniciou o request', 'color: yellow')
 	onGoingRequests.set(requestID, apiResponse);
+	// console.log('%c onGoingRequests depois do set: ', 'color: green', ...onGoingRequests.entries())
+	// console.log('%c Request adicionado a lista', 'color: yellow')
 	const awaitedApiResponse = await apiResponse;
+	// console.log('%c Request terminado', 'color: green')
 	onGoingRequests.delete(requestID);
-
+	// console.log('%c onGoingRequests depois do delete: ', 'color: green', ...onGoingRequests.entries())
+	// console.log('%c Request eliminado da lista', 'color: green')
 	return awaitedApiResponse;
 };
-
-// (async () => {
-// 	const foo = await cachedFetch<Category>({ endpoint: '/categories', key: 'categories' });
-// 	if (!foo.success) {
-// 		foo.data.type === 'Validation Error' ? foo.data.fieldErrors.
-// 	}
-	
-// })();

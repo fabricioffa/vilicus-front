@@ -1,16 +1,14 @@
-import { addClasses, removeClasses } from "./utils.js";
-
 const getTransitionClasses = (trigger: HTMLButtonElement) =>
     trigger.dataset.trasitionClasses?.split(" ");
 
 const closeDropdown = (dropdown: HTMLElement, trigger: HTMLButtonElement) => {
-    addClasses(getTransitionClasses(trigger), dropdown);
+    dropdown.classList.add(...(getTransitionClasses(trigger) ?? []));
     trigger.ariaExpanded = "false";
 };
 
 const openDropdown = (dropdown: HTMLElement, trigger: HTMLButtonElement) => {
     const transitionClasses = getTransitionClasses(trigger);
-    removeClasses(transitionClasses, dropdown);
+    transitionClasses && dropdown.classList.remove(...transitionClasses);
     document.addEventListener(
         "click",
         (e) => e.target !== dropdown && closeDropdown(dropdown, trigger),
@@ -19,7 +17,7 @@ const openDropdown = (dropdown: HTMLElement, trigger: HTMLButtonElement) => {
 
     dropdown.addEventListener(
         "click",
-        () => removeClasses(transitionClasses, dropdown),
+        () => transitionClasses && dropdown.classList.remove(...transitionClasses),
         { once: true }
     );
     trigger.ariaExpanded = "true";

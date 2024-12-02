@@ -11,7 +11,7 @@ const buildClamp = (minFontSize, maxFontSize) => {
 };
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
 	content: ['*.html', './src/ts/**/*.ts'],
 	theme: {
 		extend: {
